@@ -11,7 +11,11 @@
         },
         {
             "data": "MARZEC 2022",
-            "events": []
+            "events": [
+                "2 marca 100.000 uchodźców zostało przyjętych do Polski",
+                "9 marca atak Rosjan na szpital w Mariupolu",
+                "16 marca atak rosjan na teatr w Mariupolu"
+            ]
         },
         {
             "data": "KWIECIEŃ 2022",
@@ -25,7 +29,10 @@
         },
         {
             "data": "MAJ 2022",
-            "events": []
+            "events": [
+                "9 maja Rosyjskie ataki rakietowe w Odessie uderzyły w centrum handlowe i dwa hotele, powodując wiele ofiar",
+                "17 maja Obrońcy huty w Mariupolu. Rozległa huta stali Azovstal w Mariupolu stała się kolejnym symbolem ukraińskiego oporu w obliczu znacznie większego wroga"
+            ]
         },
         {
             "data": "CZERWIEC 2022",
