@@ -81,7 +81,12 @@
         },
         {
             "data": "GRUDZIEŃ 2022",
-            "events": []
+            "events": [
+                "2 grudnia: Import gazu z Rosji do Europy drogą morską wzrósł od stycznia o 42% rdr. i jest na rekordowym poziomie.",
+                "11 grudnia: Cena rosyjskiej ropy Ural spadła do 53$ za baryłkę; dla porównania: amerykańska WTI ~ 71 $, a brytyjska Brent: 76 $.",
+                "21 grudnia; Mołdawia po raz 1. w 30-letniej historii sprowadzi do kraju gaz, który nie pochodzi z Rosji i rezygnuje z dostaw Gazpromu.",
+
+            ]
         },
         {
             "data": "STYCZEŃ 2023",
@@ -90,6 +95,10 @@
         {
             "data": "LUTY 2023",
             "events": [
+                "5 lutego: KE przekaże Ukrainie 35 mln żarówek LED by zmniejszyć jej zapotrzebowanie na prąd. “Niesiemy światło Ukrainie!” - zadeklarowała szefowa KE U. von der Leyen.",
+                "19 lutego: Zmobilizowani rezerwiści z obw. kaliningradzkiego opublikowali nagranie, na którym buntują się wobec dowódcy, który nakazał im szturm ukraińskich pozycji w Donbasie.",
+                "24 lutego: Wg wywiadu NATO Rosja obecnie traci na Ukrainie ok. 2 tys. żołnierzy na każde zdobyte ok. 100 m terenu. ",
+                "Minął rok od wybuchu pełnoskalowej inwazji Rosji na Ukrainę. Rosjanie stracili ok. 150 tys. żołnierzy (zabici, ranni, wzięci do niewoli), 6600 wozów bojowych, 3360 czołgów, 2363 systemy artylerii, 474 wyrzutnie wieloprowadnicowe, 247 systemów przeciwlotniczych, 299 samolotów, 287 helikopterów, 2033 drony i 18 jednostek pływających."
             ]
         },
         {
@@ -98,7 +107,11 @@
         },
         {
             "data": "KWIECIEŃ 2023",
-            "events": []
+            "events": [
+                "1 kwietnia: Japonia zakazuje eksportu stali, aluminium i samolotów (w tym dronów) do Rosji w ramach kolejnego pakietu sankcji. Zakazano też dostaw maszyn budowlanych, silników okrętowych czy urządzeń optycznych.",
+                "11 kwietnia: Bułgaria zamknęła porty dla statków z rosyjskiego rejestru morskiego, niezależnie, pod jaką banderą pływają.",
+                "17 kwietnia: Apple ogłosiło koniec importu z Rosji metali takich jak wolfram, tantal i złoto, ale dalej kupuje je przez pośredników."
+            ]
         },
         {
             "data": "MAJ 2023",
