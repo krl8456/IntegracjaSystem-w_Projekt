@@ -1,12 +1,21 @@
 {
-    "events": {
+    "events": [
         {
             "data": "LUTY 2022",
             "events": [
-                "24 lutego Wladimir Putin ogłosił, że podjął decyzję o rozpoczęciu „specjalnej operacji wojskowej” we wschodniej Ukrainie",
-                ""
-
+                "24 lutego Wladimir Putin ogłosił, że podjął decyzję o rozpoczęciu „specjalnej operacji wojskowej” we wschodniej Ukrainie. Rosjanie w ciągu dnia bombardowali z powietrza i morza Wyspę Wężową na Morzu Czarnym. Wieczorem Państwowa Służba Graniczna Ukrainy przyznała, że straciła kontakt z jej obrońcami i wyspa została zdobyta. Odpowiedź obrońców na wezwanie do poddania się stała się wiralem popularnym wśród Ukraińców i społeczeństw ich wspierających",
+                "27 lutego nocą, podobnie jak w poprzednich dniach, wykonywane były przez Rosjan uderzenia rakietowo-powietrzne na całym terytorium Ukrainy, prowadzono ostrzał artyleryjski i przeprowadzano ataki dywersyjne w rejonach walk. Zniszczone zostały składy paliw w Wasylkowie pod Kijowem.",
+                "28 lutego Toczyły się walki o Charków, który został ostrzelany przez Rosjan rakietami Grad – pociski spadły m.in. na osiedla mieszkalne, powodując dużą liczbę ofiar wśród cywili. Pojawiły się też doniesienia o kolejnej rakiecie Iskander, która uderzyła w jedną z dzielnic Kijowa. Orientacyjny bilans strat rosyjskich podanych przez stronę ukraińską wynosił 5300 ludzi, 191 czołgów, 816 pojazdów opancerzonych, 29 samolotów, 29 śmigłowców. Po stronie ukraińskiej zginęło od początku konfliktu 352 cywilów, w tym 14 dzieci",
+                "Prezydent Zełenski podpisał wniosek o członkostwo Ukrainy w Unii Europejskiej. Wniosek we wspólnym liście otwartym poparli prezydenci Polski, Czech, Słowacji, Słowenii, Litwy, Łotwy, Estonii i Bułgarii, wzywając jednocześnie do szybkiego podjęcia kroków w celu natychmiastowego przyznania Ukrainie statusu kraju kandydującego do UE i rozpoczęcia procesu negocjacji."
             ]
+        },
+        {
+            "data": "MARZEC 2022",
+            "events": []
+        },
+        {
+            "data": "KWIECIEŃ 2022",
+            "events": []
         }
-    }
+    ]
 }
