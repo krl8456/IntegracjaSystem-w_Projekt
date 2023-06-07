@@ -48,6 +48,27 @@
         {
             "data": "GRUDZIEŃ 2022",
             "events": []
-        }
+        },
+        {
+            "data": "STYCZEŃ 2023",
+            "events": []
+        },
+        {
+            "data": "LUTY 2023",
+            "events": [
+            ]
+        },
+        {
+            "data": "MARZEC 2023",
+            "events": []
+        },
+        {
+            "data": "KWIECIEŃ 2023",
+            "events": []
+        },
+        {
+            "data": "MAJ 2023",
+            "events": []
+        }       
     ]
 }
