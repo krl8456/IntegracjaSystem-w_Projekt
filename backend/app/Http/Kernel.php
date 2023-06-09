@@ -12,7 +12,12 @@ class Kernel extends HttpKernel
      * These middleware are run during every request to your application.
      *
      * @var array<int, class-string|string>
+     * 
      */
+
+     protected $commands = [
+        \App\Console\Commands\ImportDataCommand::class,
+    ];
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
