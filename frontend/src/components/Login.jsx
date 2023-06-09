@@ -8,12 +8,38 @@ import {
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import {stringify} from 'flatted';
+
 function Login() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+        usernameRef,
+        passwordRef,
+      });
+
+      const { token } = response.data;
+
+      // Stringify the specific property instead of the entire response.data object
+      const tokenString = stringify(token);
+  
+      localStorage.setItem('token', tokenString);
+      navigate("/");
+
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -30,6 +56,7 @@ function Login() {
           boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px;",
           mx: "auto",
         }}
+        onSubmit={handleSubmit}
       >
         <Typography
           variant="h4"
