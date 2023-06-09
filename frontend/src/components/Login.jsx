@@ -23,18 +23,18 @@ function Login() {
 
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/login', {
-        usernameRef,
-        passwordRef,
+        username: usernameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
       });
 
-      const { token } = response.data;
+      const { access_token } = response.data;
 
-      // Stringify the specific property instead of the entire response.data object
-      const tokenString = stringify(token);
-  
+      const tokenString = stringify(access_token);
+      
       localStorage.setItem('token', tokenString);
       navigate("/");
-
+      
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -87,7 +87,6 @@ function Login() {
           variant="standard"
           color="secondary"
           autoComplete="off"
-          autoFocus
           inputRef={emailRef}
           sx={{ width: "85%" }}
         />
