@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -38,6 +39,19 @@ function Register() {
           Create an account
         </Typography>
         <Typography variant="body1" component="p">
+          Username:
+        </Typography>
+        <TextField
+          id="standard-basic"
+          type="text"
+          variant="standard"
+          color="secondary"
+          autoComplete="off"
+          autoFocus
+          inputRef={usernameRef}
+          sx={{ width: "85%" }}
+        />
+        <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
           Email:
         </Typography>
         <TextField
@@ -46,7 +60,6 @@ function Register() {
           variant="standard"
           color="secondary"
           autoComplete="off"
-          autoFocus
           inputRef={emailRef}
           sx={{ width: "85%" }}
         />
@@ -59,17 +72,6 @@ function Register() {
           variant="standard"
           color="secondary"
           inputRef={passwordRef}
-          sx={{ width: "85%" }}
-        />
-        <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
-          Password confirmation:
-        </Typography>
-        <TextField
-          id="standard-basic"
-          type="password"
-          variant="standard"
-          color="secondary"
-          inputRef={passwordConfirmRef}
           sx={{ width: "85%" }}
         />
         <Button

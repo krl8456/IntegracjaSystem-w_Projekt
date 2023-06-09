@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 function Login() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
@@ -38,6 +39,19 @@ function Login() {
           Log in
         </Typography>
         <Typography variant="body1" component="p">
+          Username:
+        </Typography>
+        <TextField
+          id="standard-basic"
+          type="text"
+          variant="standard"
+          color="secondary"
+          autoComplete="off"
+          autoFocus
+          inputRef={usernameRef}
+          sx={{ width: "85%" }}
+        />
+        <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
           Email:
         </Typography>
         <TextField
