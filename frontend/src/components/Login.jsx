@@ -36,9 +36,7 @@ function Login() {
 
       const { access_token } = response.data;
 
-      const tokenString = stringify(access_token);
-      
-      localStorage.setItem('token', tokenString);
+      localStorage.setItem('token', access_token);
       navigate("/");
       
     } catch (error) {
