@@ -18,6 +18,8 @@ export default function Navbar() {
   const userObject = useContext(UserContext);
   const [anchorProfile, setAnchorProfile] = useState(null);
   const usernameBreakpoint = useMediaQuery("(min-width: 564px)");
+  const token = localStorage.getItem("token");
+
   const navigate = useNavigate();
 
   const handleCloseProfile = () => {
@@ -30,7 +32,7 @@ export default function Navbar() {
     try {
       await axios.post("http://127.0.0.1:8000/api/logout", null, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       localStorage.removeItem("token");
@@ -40,7 +42,6 @@ export default function Navbar() {
       console.error("Logout error:", error);
     }
   };
-
 
   return (
     <AppBar position="static" color="secondary">
@@ -102,6 +103,10 @@ export default function Navbar() {
               </MenuItem>
             </Menu>
           </div>
+        ) : token ? (
+          <Typography variant="body1" component="span" sx={{ml: "auto"}}>
+            Loading...
+          </Typography>
         ) : (
           <div className="ml-auto flex gap-10">
             <Link color="inherit" to="/">
