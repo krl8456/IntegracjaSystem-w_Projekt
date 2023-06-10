@@ -4,24 +4,30 @@ import {
   TextField,
   Typography,
   useMediaQuery,
+  Alert
 } from "@mui/material";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {stringify} from 'flatted';
+import { useState } from "react";
 
 function Login() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setError('');
+      setLoading(true);
       const response = await axios.post('http://127.0.0.1:8000/api/login', {
         username: usernameRef.current.value,
         email: emailRef.current.value,
@@ -36,8 +42,11 @@ function Login() {
       navigate("/");
       
     } catch (error) {
+      setError("Failed to sign in");
       console.error('Login error:', error);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -106,9 +115,11 @@ function Login() {
           variant="contained"
           color="secondary"
           sx={{ mt: "3em", px: "4em", py: "1em", display: "block", mx: "auto" }}
+          disabled={loading}
         >
           Log In
         </Button>
+        {error && <Alert severity="error" sx={{mt: "1.5em"}}>{error}</Alert>}
         <Typography
           variant="body1"
           component="p"
