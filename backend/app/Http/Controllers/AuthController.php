@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\User;
@@ -54,5 +55,34 @@ class AuthController extends Controller
         return [
             'message' => 'Logged out'
         ];
+    }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'email' => 'required|string|email|max:255|unique:users,email,' . auth()->user()->id,
+            'password' => 'required|string|min:8'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $user = User::findOrFail(auth()->user()->id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()
+            ->json(['message' => 'User information updated successfully']);
+    }
+    public function delete(Request $request)
+    {
+        $user = User::findOrFail(auth()->user()->id);
+        $user->delete();
+        return response()->json(['message' => 'User deleted successfully']);
     }
 }
