@@ -15,7 +15,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../contexts/UserContext";
 
 export default function Navbar() {
-  const user = useContext(UserContext);
+  const userObject = useContext(UserContext);
   const [anchorProfile, setAnchorProfile] = useState(null);
   const usernameBreakpoint = useMediaQuery("(min-width: 564px)");
   const navigate = useNavigate();
@@ -41,13 +41,14 @@ export default function Navbar() {
     }
   };
 
+
   return (
     <AppBar position="static" color="secondary">
       <Toolbar sx={{ display: "flex" }}>
         <Typography variant="h6" component="div">
           My App
         </Typography>
-        {user ? (
+        {userObject.user ? (
           <div className="ml-auto">
             <IconButton
               size="large"
@@ -60,7 +61,7 @@ export default function Navbar() {
               <AccountCircle sx={{ mr: ".5em" }} />
               {usernameBreakpoint && (
                 <Typography variant="body1" component="span">
-                  {user.name}
+                  {userObject.user.name}
                 </Typography>
               )}
             </IconButton>

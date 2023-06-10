@@ -10,8 +10,8 @@ import { useRef } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {stringify} from 'flatted';
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from '../contexts/UserContext';
 
 function Login() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
@@ -21,6 +21,8 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +39,14 @@ function Login() {
       const { access_token } = response.data;
 
       localStorage.setItem('token', access_token);
+      
+      const getUser = await axios.get('http://127.0.0.1:8000/api/user', {
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        }
+      });
+      
+      setUser(getUser.data);
       navigate("/");
       
     } catch (error) {

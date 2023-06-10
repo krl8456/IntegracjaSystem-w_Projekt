@@ -6,9 +6,9 @@ import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from '../contexts/UserContext';
 import axios from "axios";
-import { stringify } from "flatted";
 
 function Register() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
@@ -19,6 +19,7 @@ function Register() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +41,15 @@ function Register() {
       const { access_token } = response.data;
 
       localStorage.setItem("token", access_token);
+
+      const getUser = await axios.get("http://127.0.0.1:8000/api/user", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      setUser(getUser.data);
+
       navigate("/");
     } catch (error) {
       setError("Failed to create an account");
