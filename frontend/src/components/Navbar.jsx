@@ -15,7 +15,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../contexts/UserContext";
 
 export default function Navbar() {
-  const userObject = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const [anchorProfile, setAnchorProfile] = useState(null);
   const usernameBreakpoint = useMediaQuery("(min-width: 564px)");
   const token = localStorage.getItem("token");
@@ -46,10 +46,8 @@ export default function Navbar() {
   return (
     <AppBar position="static" color="secondary">
       <Toolbar sx={{ display: "flex" }}>
-        <Typography variant="h6" component="div">
-          My App
-        </Typography>
-        {userObject.user ? (
+        <Link to="/">My App</Link>
+        {user ? (
           <div className="ml-auto">
             <IconButton
               size="large"
@@ -62,7 +60,7 @@ export default function Navbar() {
               <AccountCircle sx={{ mr: ".5em" }} />
               {usernameBreakpoint && (
                 <Typography variant="body1" component="span">
-                  {userObject.user.name}
+                  {user.name}
                 </Typography>
               )}
             </IconButton>
@@ -104,7 +102,7 @@ export default function Navbar() {
             </Menu>
           </div>
         ) : token ? (
-          <Typography variant="body1" component="span" sx={{ml: "auto"}}>
+          <Typography variant="body1" component="span" sx={{ ml: "auto" }}>
             Loading...
           </Typography>
         ) : (
