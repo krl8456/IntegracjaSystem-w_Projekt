@@ -1,15 +1,24 @@
 import { AccountCircle } from "@mui/icons-material";
-import { AppBar, Typography, Toolbar, IconButton, useMediaQuery, MenuItem, Menu } from "@mui/material";
-import React, { useState } from "react";
+import {
+  AppBar,
+  Typography,
+  Toolbar,
+  IconButton,
+  useMediaQuery,
+  MenuItem,
+  Menu,
+} from "@mui/material";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Navbar() {
-  const token = localStorage.getItem("token");
+  const user = useContext(UserContext);
   const [anchorProfile, setAnchorProfile] = useState(null);
   const usernameBreakpoint = useMediaQuery("(min-width: 564px)");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleCloseProfile = () => {
     setAnchorProfile(null);
@@ -19,19 +28,18 @@ export default function Navbar() {
   };
   const handleLogout = async () => {
     try {
-        console.log(token);
-        await axios.post('http://127.0.0.1:8000/api/logout', null, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        localStorage.removeItem('token');
-        window.location.reload();
-        navigate("/");
+      await axios.post("http://127.0.0.1:8000/api/logout", null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      localStorage.removeItem("token");
+      window.location.reload();
+      navigate("/");
     } catch (error) {
-        console.error('Logout error:', error);
+      console.error("Logout error:", error);
     }
-};
+  };
 
   return (
     <AppBar position="static" color="secondary">
@@ -39,7 +47,7 @@ export default function Navbar() {
         <Typography variant="h6" component="div">
           My App
         </Typography>
-        {token ? (
+        {user ? (
           <div className="ml-auto">
             <IconButton
               size="large"
@@ -52,7 +60,7 @@ export default function Navbar() {
               <AccountCircle sx={{ mr: ".5em" }} />
               {usernameBreakpoint && (
                 <Typography variant="body1" component="span">
-                  email
+                  {user.name}
                 </Typography>
               )}
             </IconButton>
@@ -81,8 +89,7 @@ export default function Navbar() {
               <Link
                 to="/purchases"
                 style={{ textDecoration: "none", color: "black" }}
-              >
-              </Link>
+              ></Link>
               <MenuItem
                 onClick={() => {
                   handleCloseProfile();
