@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { UserProvider } from "./contexts/UserContext";
 import RequireAuth from "./components/RequireAuth";
 import Dashboard from "./components/Dashboard";
+import UpdateProfile from "./components/UpdateProfile";
 function App() {
   return (
     <UserProvider>
@@ -20,6 +21,15 @@ function App() {
           element={
             <RequireAuth>
               <Dashboard />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/update-profile"
+          exact
+          element={
+            <RequireAuth>
+              <UpdateProfile />
             </RequireAuth>
           }
         />

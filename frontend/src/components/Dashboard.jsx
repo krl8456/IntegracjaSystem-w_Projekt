@@ -1,8 +1,6 @@
 import {
-  Paper,
   Typography,
   Box,
-  CircularProgress,
   Button,
   useMediaQuery,
 } from "@mui/material";
@@ -17,9 +15,7 @@ function Dashboard() {
 
   if (!user) {
     return (
-      <Box sx={{ margin: "auto" }}>
-        <CircularProgress size={40} />
-      </Box>
+      <></>
     );
   }
 
