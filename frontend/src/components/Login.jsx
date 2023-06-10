@@ -29,7 +29,7 @@ function Login() {
       setError('');
       setLoading(true);
       const response = await axios.post('http://127.0.0.1:8000/api/login', {
-        username: usernameRef.current.value,
+        name: usernameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
