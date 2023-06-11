@@ -127,55 +127,111 @@ const Charts = () => {
   }, [checkedProducts, nonConsumerChartData, consumerChartData]);
 
   return (
-    <>
-      <Box
-        sx={{
-          paddingInline: 3,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-        }}
-      >
-        <Box>
-          <Typography variant="h4" component="p" sx={{ marginBlock: 3 }}>
-            Wybierz produkty:
-          </Typography>
-          {nonConsumerChartData.map((option, index) => (
-            <div key={index}>
-              <label>
-                <input
-                  type="checkbox"
-                  value={option.name}
-                  checked={checkedProducts.includes(option.name)}
-                  onChange={handleCheckboxChange}
-                />
-                {option.name}
-              </label>
-            </div>
-          ))}
-          {consumerChartData.map((option, index) => (
-            <div key={index}>
-              <label>
-                <input
-                  type="checkbox"
-                  value={option.name}
-                  checked={checkedProducts.includes(option.name)}
-                  onChange={handleCheckboxChange}
-                />
-                {option.name}
-              </label>
-            </div>
-          ))}
+    <div>
+      <div>
+        <Box display="flex">
+          <Box flex="1">
+            <Typography variant="h4" component="p" sx={{ marginBlock: 3 }}>
+              Towary nieżywnościone i usługi:
+            </Typography>
+            {nonConsumerChartData.map((option, index) => (
+              <div key={index}>
+                <label>
+                  <Typography variant="body1" component="p">
+                    <input
+                      type="checkbox"
+                      value={option.name}
+                      checked={checkedProducts.includes(option.name)}
+                      onChange={handleCheckboxChange}
+                    />
+                    {" " + option.name}
+                  </Typography>
+                </label>
+              </div>
+            ))}
+          </Box>
+          <Box flex="1">
+            <Typography variant="h4" component="p" sx={{ marginBlock: 3 }}>
+              Towary żywnościowe:
+            </Typography>
+            {consumerChartData.map((option, index) => (
+              <div key={index}>
+                <label>
+                  <Typography variant="body1" component="p">
+                    <input
+                      type="checkbox"
+                      value={option.name}
+                      checked={checkedProducts.includes(option.name)}
+                      onChange={handleCheckboxChange}
+                    />
+                    {" " + option.name}
+                  </Typography>
+                </label>
+              </div>
+            ))}
+          </Box>
+         <Button color="secondary" variant="contained" sx={{ mr: 10, mb: 20, mt: 10 }} onClick={downloadFile}>
+           Wyeksportuj Dane
+         </Button>
         </Box>
-        <Button color="secondary" variant="contained" sx={{ mr: 10, mt: 10 }} onClick={downloadFile}>
-          Wyeksportuj Dane
-        </Button>
-      </Box>
+      </div>
       <div>
         <HighchartsReact highcharts={Highcharts} options={options} />
       </div>
-    </>
+    </div>
   );
 };
 
 export default Charts;
+    // <>
+    //   <Box
+    //     sx={{
+    //       paddingInline: 3,
+    //       display: "flex",
+    //       justifyContent: "space-between",
+    //       alignItems: "flex-start",
+    //     }}
+    //   >
+    //     <Box>
+    //       <Typography variant="h4" component="p" sx={{ marginBlock: 3 }}>
+    //         Wybierz produkty:
+    //       </Typography>
+    //       {nonConsumerChartData.map((option, index) => (
+    //         <div key={index}>
+    //           <label>
+    //             <Typography variant="h8" component="p" sx={{ marginBlock: 3 }}>
+    //             <input
+    //               type="checkbox"
+    //               value={option.name}
+    //               checked={checkedProducts.includes(option.name)}
+    //               onChange={handleCheckboxChange}
+    //             />
+    //             {"  "+option.name}
+    //             </Typography>
+    //           </label>
+    //         </div>
+    //       ))}
+    //       {consumerChartData.map((option, index) => (
+    //         <div key={index}>
+    //           <label>
+    //             <Typography variant="h8" component="p" sx={{ marginBlock: 3 }}>
+    //             <input
+    //               type="checkbox"
+    //               value={option.name}
+    //               checked={checkedProducts.includes(option.name)}
+    //               onChange={handleCheckboxChange}
+    //             />
+    //             {"  "+option.name}
+    //             </Typography>
+    //           </label>
+    //         </div>
+    //       ))}
+    //     </Box>
+    //     <Button color="secondary" variant="contained" sx={{ mr: 10, mt: 10 }} onClick={downloadFile}>
+    //       Wyeksportuj Dane
+    //     </Button>
+    //   </Box>
+    //   <div>
+    //     <HighchartsReact highcharts={Highcharts} options={options} />
+    //   </div>
+    // </>
