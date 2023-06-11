@@ -46,27 +46,27 @@ class JsonToXmlController extends Controller
     }
 
     private function arrayToXml($data, $rootNodeName)
-    {
-        $xml = new \SimpleXMLElement("<?xml version=\"1.0\" encoding=\"UTF-8\"?><$rootNodeName></$rootNodeName>");
+{
+    $xml = new \SimpleXMLElement("<?xml version=\"1.0\" encoding=\"UTF-8\"?><$rootNodeName></$rootNodeName>");
 
-        $arrayToXml = function ($data, &$xml) use (&$arrayToXml) {
-            foreach ($data as $key => $value) {
-                if (is_array($value)) {
-                    if (!is_numeric($key)) {
-                        $subnode = $xml->addChild("$key");
-                        $arrayToXml($value, $subnode);
-                    } else {
-                        $subnode = $xml->addChild("item$key");
-                        $arrayToXml($value, $subnode);
-                    }
+    $arrayToXml = function ($data, &$xml) use (&$arrayToXml) {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                if (!is_numeric($key)) {
+                    $subnode = $xml->addChild(str_replace(' ', '_', $key));
+                    $arrayToXml($value, $subnode);
                 } else {
-                    $xml->addChild("$key", htmlspecialchars("$value"));
+                    $subnode = $xml->addChild("item$key");
+                    $arrayToXml($value, $subnode);
                 }
+            } else {
+                $xml->addChild(str_replace(' ', '_', $key), htmlspecialchars("$value"));
             }
-        };
+        }
+    };
 
-        $arrayToXml($data, $xml);
+    $arrayToXml($data, $xml);
 
-        return $xml->asXML();
-    }
+    return $xml->asXML();
+}
 }
