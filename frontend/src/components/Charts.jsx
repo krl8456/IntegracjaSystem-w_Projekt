@@ -10,6 +10,7 @@ const Charts = () => {
   const [nonConsumerChartData, setNonConsumerChartData] = useState([]);
   const [consumerChartData, setConsumerChartData] = useState([]);
   const [eventsData, setEventsData] = useState([]);
+  const [index, setIndex] = useState(null);
   const token = localStorage.getItem("token");
 
 
@@ -37,8 +38,6 @@ const Charts = () => {
 
     fetchData();
   }, []);
-
-  console.log(eventsData)
 
   const downloadFile = () => {
     axios({
@@ -108,7 +107,7 @@ const Charts = () => {
         point: {
           events: {
             click: function () {
-              alert("Data: " + eventsData[this.x].data + "\nWydarzenia w danym miesiącu:\n " + eventsData[this.x].wydarzenia);
+              setIndex(this.x);
             }
           }
         }
@@ -149,7 +148,7 @@ const Charts = () => {
   return (
     <div>
       <div>
-        <Box display="flex">
+        <Box display="flex" sx={{marginLeft: 3}}>
           <Box flex="1">
             <Typography variant="h4" component="p" sx={{ marginBlock: 3 }}>
               Towary nieżywnościone i usługi:
@@ -198,60 +197,18 @@ const Charts = () => {
       <div>
         <HighchartsReact highcharts={Highcharts} options={options} />
       </div>
+      <Box sx={{ marginLeft: 3 }} >
+        { index !== null && ( <>
+        <Typography variant="h6" component="p" sx={{ marginBlock: 3 }}>
+            {eventsData[index].data}
+        </Typography>
+        <Typography variant="body1" component="p" sx={{ marginBlock: 3 }}>
+            {eventsData[index].wydarzenia}
+        </Typography></>
+        )}
+      </Box>
     </div>
   );
 };
 
 export default Charts;
-    // <>
-    //   <Box
-    //     sx={{
-    //       paddingInline: 3,
-    //       display: "flex",
-    //       justifyContent: "space-between",
-    //       alignItems: "flex-start",
-    //     }}
-    //   >
-    //     <Box>
-    //       <Typography variant="h4" component="p" sx={{ marginBlock: 3 }}>
-    //         Wybierz produkty:
-    //       </Typography>
-    //       {nonConsumerChartData.map((option, index) => (
-    //         <div key={index}>
-    //           <label>
-    //             <Typography variant="h8" component="p" sx={{ marginBlock: 3 }}>
-    //             <input
-    //               type="checkbox"
-    //               value={option.name}
-    //               checked={checkedProducts.includes(option.name)}
-    //               onChange={handleCheckboxChange}
-    //             />
-    //             {"  "+option.name}
-    //             </Typography>
-    //           </label>
-    //         </div>
-    //       ))}
-    //       {consumerChartData.map((option, index) => (
-    //         <div key={index}>
-    //           <label>
-    //             <Typography variant="h8" component="p" sx={{ marginBlock: 3 }}>
-    //             <input
-    //               type="checkbox"
-    //               value={option.name}
-    //               checked={checkedProducts.includes(option.name)}
-    //               onChange={handleCheckboxChange}
-    //             />
-    //             {"  "+option.name}
-    //             </Typography>
-    //           </label>
-    //         </div>
-    //       ))}
-    //     </Box>
-    //     <Button color="secondary" variant="contained" sx={{ mr: 10, mt: 10 }} onClick={downloadFile}>
-    //       Wyeksportuj Dane
-    //     </Button>
-    //   </Box>
-    //   <div>
-    //     <HighchartsReact highcharts={Highcharts} options={options} />
-    //   </div>
-    // </>
