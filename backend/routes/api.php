@@ -5,6 +5,8 @@ use App\Http\Controllers\NonConsumerProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JsonToXmlController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +30,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::put('/user/update', [AuthController::class, 'update']);
     Route::delete('/user/delete', [AuthController::class, 'delete']);
-    Route::get('/consumerproducts', [ConsumerProductController::class, 'index']);
-    Route::get('/consumerproducts/{id}', [ConsumerProductController::class, 'show']);
-    Route::get('/nonconsumerproducts', [NonConsumerProductController::class, 'index']);
-    Route::get('/nonconsumerproducts/{id}', [NonConsumerProductController::class, 'show']);
-
+    Route::get('/xml', [JsonToXmlController::class, 'getCombinedXmlData']);
+    Route::get('/consumer-products/xml', [JsonToXmlController::class, 'convertConsumerProducts']);
+    Route::get('/non-consumer-products/xml', [JsonToXmlController::class, 'convertNonConsumerProducts']);
+    Route::get('/consumer-products', [ConsumerProductController::class, 'index']);
+    Route::get('/consumer-products/{id}', [ConsumerProductController::class, 'show']);
+    Route::get('/non-consumer-products', [NonConsumerProductController::class, 'index']);
+    Route::get('/non-consumer-products/{id}', [NonConsumerProductController::class, 'show']);
+    
 });
