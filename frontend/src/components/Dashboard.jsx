@@ -1,8 +1,10 @@
 import { Typography, Box, Button, useMediaQuery, Modal } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
@@ -10,6 +12,12 @@ function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const token = localStorage.getItem("token");
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
 
   const style = {
     position: "absolute",
@@ -27,8 +35,32 @@ function Dashboard() {
     return <></>;
   }
 
-  const handleDelete = async () => {
-    
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setLoading(true);
+      const response = await axios.delete(
+        "http://127.0.0.1:8000/api/user/delete",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      localStorage.removeItem("token", token);
+
+      setUser(null);
+      handleClose();
+      navigate("/");
+    } catch (error) {
+      setError("Failed to delete an account");
+      console.error("Delete error:", error);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -101,15 +133,21 @@ function Dashboard() {
               >
                 Are you sure?
               </Typography>
-              <Box sx={{display: "flex", gap: 5}}>
+              <Box sx={{ display: "flex", gap: 5 }}>
                 <Button
                   onClick={handleDelete}
                   color="primary"
                   variant="contained"
+                  disabled={loading}
                 >
                   Yes
                 </Button>
-                <Button onClick={handleClose} color="error" variant="contained">
+                <Button
+                  onClick={handleClose}
+                  color="error"
+                  variant="contained"
+                  disabled={loading}
+                >
                   Cancel
                 </Button>
               </Box>
