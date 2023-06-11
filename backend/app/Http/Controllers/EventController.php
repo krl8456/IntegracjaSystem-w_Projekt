@@ -11,23 +11,23 @@ use App\Models\Event;
 
 class EventController extends Controller
 {
-    public function getChartDataCons()
+    public function getEventsData()
     {
         $dane = Event::select('data', 'wydarzenia')->get();
 
-        $formattedData = $dane->map(function ($data) {
-            $values = [];
-            foreach ($data->toArray() as $key => $value) {
-                
-                    $values[] = $value;
-            }
+        // $formattedData = $dane->map(function ($data) {
+        //     $values = [];
+        //     foreach ($data->toArray() as $key => $value) {
 
-            return [
-                'data' => $data,
-                'wydarzenia' => $values,
-            ];
-        });
+        //             $values[] = $value;
+        //     }
 
-        return response()->json($formattedData);
+        //     return [
+        //         'data' => $data,
+        //         'wydarzenia' => $values,
+        //     ];
+        // });
+
+        return response()->json($dane);
     }
 }

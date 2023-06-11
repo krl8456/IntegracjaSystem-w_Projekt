@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NonConsumerProductController;
 use App\Http\Controllers\ConsumerProductController;
-
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,7 @@ use App\Http\Controllers\ConsumerProductController;
 
 Route::get('/api/non-consumer-product-chart-data', [NonConsumerProductController::class, 'getChartData']);
 Route::get('/api/consumer-product-chart-data', [ConsumerProductController::class, 'getChartDataCons']);
+Route::get('/api/events-data', [EventController::class, 'getEventsData']);
 
 Route::get('/', function () {
     return view('welcome');

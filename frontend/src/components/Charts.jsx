@@ -9,6 +9,7 @@ const Charts = () => {
   const [productData, setProductData] = useState([]);
   const [nonConsumerChartData, setNonConsumerChartData] = useState([]);
   const [consumerChartData, setConsumerChartData] = useState([]);
+  const [eventsData, setEventsData] = useState([]);
   const token = localStorage.getItem("token");
 
 
@@ -24,6 +25,11 @@ const Charts = () => {
           "http://127.0.0.1:8000/api/consumer-product-chart-data"
         );
         setConsumerChartData(consumerProduct.data);
+
+        const events = await axios.get(
+          "http://127.0.0.1:8000/api/events-data"
+        );
+        setEventsData(events.data);
       } catch (error) {
         console.error(error);
       }
@@ -31,6 +37,8 @@ const Charts = () => {
 
     fetchData();
   }, []);
+
+  console.log(eventsData)
 
   const downloadFile = () => {
     axios({
@@ -91,8 +99,20 @@ const Charts = () => {
     },
     yAxis: {
       title: {
-        text: "Value",
+        text: "Cena w złotówkach",
       },
+    },
+    plotOptions: {
+      series: {
+        cursor: "pointer",
+        point: {
+          events: {
+            click: function () {
+              alert("Data: " + eventsData[this.x].data + "\nWydarzenia w danym miesiącu:\n " + eventsData[this.x].wydarzenia);
+            }
+          }
+        }
+      }
     },
     series: checkedProducts.map((product) => ({
       name: product,
