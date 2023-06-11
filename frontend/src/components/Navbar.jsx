@@ -15,7 +15,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../contexts/UserContext";
 
 export default function Navbar() {
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [anchorProfile, setAnchorProfile] = useState(null);
   const usernameBreakpoint = useMediaQuery("(min-width: 564px)");
   const token = localStorage.getItem("token");
@@ -49,6 +49,14 @@ export default function Navbar() {
         <Link to="/">My App</Link>
         {user ? (
           <div className="ml-auto">
+            <Link
+              to="/chart"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <Typography variant="body1" component="span">
+                  Charts
+                </Typography>
+            </Link>
             <IconButton
               size="large"
               aria-label="account of current user"

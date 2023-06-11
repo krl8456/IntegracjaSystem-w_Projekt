@@ -7,11 +7,18 @@ import { UserProvider } from "./contexts/UserContext";
 import RequireAuth from "./components/RequireAuth";
 import Dashboard from "./components/Dashboard";
 import UpdateProfile from "./components/UpdateProfile";
+import Charts from "./components/Charts";
+
 function App() {
   return (
     <UserProvider>
       <Navbar />
       <Routes>
+        <Route path="/chart" exact element={
+            <RequireAuth>
+              <Charts />
+            </RequireAuth>
+          } />
         <Route path="/" exact element={<Home />} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/register" exact element={<Register />} />
@@ -39,3 +46,4 @@ function App() {
 }
 
 export default App;
+{}

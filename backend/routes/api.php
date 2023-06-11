@@ -33,9 +33,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/xml', [JsonToXmlController::class, 'getCombinedXmlData']);
     Route::get('/consumer-products/xml', [JsonToXmlController::class, 'convertConsumerProducts']);
     Route::get('/non-consumer-products/xml', [JsonToXmlController::class, 'convertNonConsumerProducts']);
-    Route::get('/consumer-products', [ConsumerProductController::class, 'index']);
-    Route::get('/consumer-products/{id}', [ConsumerProductController::class, 'show']);
-    Route::get('/non-consumer-products', [NonConsumerProductController::class, 'index']);
-    Route::get('/non-consumer-products/{id}', [NonConsumerProductController::class, 'show']);
+    // Route::get('/consumer-products', [ConsumerProductController::class, 'index']);
+    // Route::get('/consumer-products/{id}', [ConsumerProductController::class, 'show']);
+    // Route::get('/non-consumer-products', [NonConsumerProductController::class, 'index']);
+    // Route::get('/non-consumer-products/{id}', [NonConsumerProductController::class, 'show']);
     
 });

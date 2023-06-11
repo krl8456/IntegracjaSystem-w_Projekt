@@ -2,71 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ConsumerProduct;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+
+use App\Models\ConsumerProduct;
 
 class ConsumerProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function getChartDataCons()
     {
-        $consumerProducts = ConsumerProduct::all();
-        return response()->json($consumerProducts);
-    }
+        $data = ConsumerProduct::select('Towary żywnościowe', '2021 M01', '2021 M02', '2021 M03', '2021 M04', '2021 M05', '2021 M06', '2021 M07', '2021 M08', '2021 M09', '2021 M10', '2021 M11', '2021 M12', '2022 M01', '2022 M02', '2022 M03', '2022 M04', '2022 M05', '2022 M06', '2022 M07', '2022 M08', '2022 M09', '2022 M10', '2022 M11', '2022 M12', '2023 M01', '2023 M02', '2023 M03', '2023 M04')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $formattedData = $data->map(function ($item) {
+            $values = [];
+            foreach ($item->toArray() as $key => $value) {
+                if ($key !== 'Towary żywnościowe') {
+                    $values[] = $value;
+                }
+            }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            return [
+                'name' => $item['Towary żywnościowe'],
+                'data' => $values,
+            ];
+        });
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $consumerProduct = ConsumerProduct::find($id);
-
-        if (!$consumerProduct) {
-            return response()->json(['message' => 'Consumer product not found'], 404);
-        }
-
-        return response()->json($consumerProduct);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($formattedData);
     }
 }
