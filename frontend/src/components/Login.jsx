@@ -50,7 +50,7 @@ function Login() {
       navigate("/");
       
     } catch (error) {
-      setError("Failed to sign in");
+      setError("Nieprawidłowy dane. Spróbuj jeszcze raz");
       console.error('Login error:', error);
     }
 
@@ -80,10 +80,10 @@ function Login() {
           component="h2"
           sx={{ mb: "1em", textAlign: "center" }}
         >
-          Log in
+          Zaloguj się
         </Typography>
         <Typography variant="body1" component="p">
-          Username:
+          Nazwa:
         </Typography>
         <TextField
           id="standard-basic"
@@ -108,7 +108,7 @@ function Login() {
           sx={{ width: "85%" }}
         />
         <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
-          Password:
+          Hasło:
         </Typography>
         <TextField
           id="standard-basic"
@@ -125,7 +125,7 @@ function Login() {
           sx={{ mt: "3em", px: "4em", py: "1em", display: "block", mx: "auto" }}
           disabled={loading}
         >
-          Log In
+          Zaloguj się
         </Button>
         {error && <Alert severity="error" sx={{mt: "1.5em"}}>{error}</Alert>}
         <Typography
@@ -133,9 +133,9 @@ function Login() {
           component="p"
           sx={{ mt: "2em", textAlign: "center" }}
         >
-          Don't have an account?{" "}
+          Nie masz konta?{" "}
           <Link to={"/register"} className="text-blue-500">
-            Sign up
+            Zarejestruj sie
           </Link>
         </Typography>
       </Box>

@@ -85,10 +85,10 @@ const UpdateProfile = () => {
           component="h2"
           sx={{ mb: "1em", textAlign: "center" }}
         >
-          Update Profile
+          Zaaktualizuj swój profil
         </Typography>
         <Typography variant="body1" component="p">
-          Username:
+          Nazwa:
         </Typography>
         <TextField
           id="standard-basic"
@@ -115,7 +115,7 @@ const UpdateProfile = () => {
           defaultValue={user.email}
         />
         <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
-          Password:
+          Hasło:
         </Typography>
         <TextField
           id="standard-basic"
@@ -124,10 +124,10 @@ const UpdateProfile = () => {
           color="secondary"
           inputRef={passwordRef}
           sx={{ width: "85%" }}
-          placeholder="Password should contain at least 8 characters"
+          placeholder="Hasło powinno zawierać co najmniej 8 znaków"
         />
         <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
-          Password confirmation:
+          Powtórz hasło:
         </Typography>
         <TextField
           id="standard-basic"
@@ -136,7 +136,7 @@ const UpdateProfile = () => {
           color="secondary"
           inputRef={passwordConfirmRef}
           sx={{ width: "85%" }}
-          placeholder="Password should contain at least 8 characters"
+          placeholder="Hasło powinno zawierać co najmniej 8 znaków"
         />
         <Button
           type="submit"
@@ -145,7 +145,7 @@ const UpdateProfile = () => {
           sx={{ mt: "3em", px: "4em", py: "1em", display: "block", mx: "auto" }}
           disabled={loading}
         >
-          Update
+          Zaaktulizuj
         </Button>
         {error && (
           <Alert severity="error" sx={{ mt: "1.5em" }}>
@@ -157,7 +157,7 @@ const UpdateProfile = () => {
           to={"/Dashboard"}
           style={{ marginTop: "2em", display: "block", textAlign: "center" }}
         >
-          Cancel
+          Anuluj
         </Link>
       </Box>
     </Box>

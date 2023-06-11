@@ -83,7 +83,7 @@ function Dashboard() {
           component="h2"
           sx={{ mt: mediaBreakpoint ? "1.5em" : "2em" }}
         >
-          Profile
+          Profil
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
           <AccountCircleIcon sx={{ fontSize: "5em" }} />
@@ -105,7 +105,7 @@ function Dashboard() {
               color="secondary"
               sx={{ width: "15em", mt: "3em" }}
             >
-              Update your profile
+              Zaauktualizuj profil
             </Button>
           </Link>
 
@@ -115,7 +115,7 @@ function Dashboard() {
             sx={{ width: "15em", mt: "3em" }}
             onClick={handleOpen}
           >
-            Delete your profile
+            Usuń profil
           </Button>
           <Modal
             open={open}
@@ -130,7 +130,7 @@ function Dashboard() {
                 component="h2"
                 sx={{ mb: 10 }}
               >
-                Are you sure?
+                Czy na pewno?
               </Typography>
               <Box sx={{ display: "flex", gap: 5 }}>
                 <Button
@@ -139,7 +139,7 @@ function Dashboard() {
                   variant="contained"
                   disabled={loading}
                 >
-                  Yes
+                  Tak
                 </Button>
                 <Button
                   onClick={handleClose}
@@ -147,7 +147,7 @@ function Dashboard() {
                   variant="contained"
                   disabled={loading}
                 >
-                  Cancel
+                  Anuluj
                 </Button>
               </Box>
             </Box>

@@ -25,7 +25,7 @@ function Register() {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords don't match");
+      return setError("Hasło i jego potwierdzenie muszą być jednakowe");
     }
 
     try {
@@ -52,7 +52,7 @@ function Register() {
 
       navigate("/");
     } catch (error) {
-      setError("Failed to create an account");
+      setError("Wystąpił błąd");
       console.error("Register error:", error);
     }
 
@@ -82,10 +82,10 @@ function Register() {
           component="h2"
           sx={{ mb: "1em", textAlign: "center" }}
         >
-          Create an account
+          Załóż konto
         </Typography>
         <Typography variant="body1" component="p">
-          Username:
+          Nazwa:
         </Typography>
         <TextField
           id="standard-basic"
@@ -110,7 +110,7 @@ function Register() {
           sx={{ width: "85%" }}
         />
         <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
-          Password:
+          Hasło:
         </Typography>
         <TextField
           id="standard-basic"
@@ -121,7 +121,7 @@ function Register() {
           sx={{ width: "85%" }}
         />
         <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
-          Password confirmation:
+          Powtórz hasło:
         </Typography>
         <TextField
           id="standard-basic"
@@ -138,7 +138,7 @@ function Register() {
           sx={{ mt: "3em", px: "4em", py: "1em", display: "block", mx: "auto" }}
           disabled={loading}
         >
-          Sign up
+          Zaloguj się
         </Button>
         {error && (
           <Alert severity="error" sx={{ mt: "1.5em" }}>
@@ -146,9 +146,9 @@ function Register() {
           </Alert>
         )}
         <Typography variant="body1" component="p" sx={{ mt: "2em" }}>
-          Already have an account?{" "}
+          Masz już konto?{" "}
           <Link to={"/login"} className="text-blue-500">
-            Sign in
+            Zaloguj się
           </Link>
         </Typography>
       </Box>

@@ -7,6 +7,7 @@ import {
   useMediaQuery,
   MenuItem,
   Menu,
+  Box,
 } from "@mui/material";
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
@@ -48,13 +49,13 @@ export default function Navbar() {
       <Toolbar sx={{ display: "flex" }}>
         <Link to="/">My App</Link>
         {user ? (
-          <div className="ml-auto">
+          <Box sx={{ml: "auto"}}>
             <Link
               to="/chart"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <Typography variant="body1" component="span">
-                  Charts
+              <Typography variant="body1" component="span" sx={{color: "white"}}>
+                  Wykresy
                 </Typography>
             </Link>
             <IconButton
@@ -92,7 +93,7 @@ export default function Navbar() {
                 to="/dashboard"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <MenuItem onClick={handleCloseProfile}>Profile</MenuItem>
+                <MenuItem onClick={handleCloseProfile}>Mój profil</MenuItem>
               </Link>
               <Link
                 to="/purchases"
@@ -105,26 +106,26 @@ export default function Navbar() {
                 }}
                 sx={{ color: "red", borderTop: 1, borderTopColor: "gray" }}
               >
-                Log out
+                Wyloguj się
               </MenuItem>
             </Menu>
-          </div>
+          </Box>
         ) : token ? (
           <Typography variant="body1" component="span" sx={{ ml: "auto" }}>
-            Loading...
+            Moment...
           </Typography>
         ) : (
-          <div className="ml-auto flex gap-10">
+          <Box sx={{display: "flex", ml: "auto",  gap: 5}}>
             <Link color="inherit" to="/">
-              Home
+              Strona główna
             </Link>
             <Link color="inherit" to="/login">
-              Login
+              Zaloguj się
             </Link>
             <Link color="inherit" to="/register">
-              Register
+              Zarejestruj się
             </Link>
-          </div>
+          </Box>
         )}
       </Toolbar>
     </AppBar>
