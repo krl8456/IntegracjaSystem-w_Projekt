@@ -104,7 +104,6 @@ function Dashboard() {
               variant="contained"
               color="secondary"
               sx={{ width: "15em", mt: "3em" }}
-              onClick={handleDelete}
             >
               Update your profile
             </Button>
