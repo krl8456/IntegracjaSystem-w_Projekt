@@ -224,7 +224,7 @@ const Charts = () => {
           </>
         ) : (
           <Typography variant="body1" component="p">
-            No data
+            Wybierz miesiąc (data rozpoczęcia Luty 2021)
           </Typography>
         )}
       </Box>

@@ -15,7 +15,6 @@ import { UserContext } from '../contexts/UserContext';
 
 function Login() {
   const mediaBreakpoint = useMediaQuery("(min-width:900px)");
-  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [loading, setLoading] = useState(false);
@@ -35,7 +34,6 @@ function Login() {
       setError('');
       setLoading(true);
       const response = await axios.post('http://127.0.0.1:8000/api/login', {
-        name: usernameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
@@ -86,19 +84,6 @@ function Login() {
         >
           Zaloguj się
         </Typography>
-        <Typography variant="body1" component="p">
-          Nazwa:
-        </Typography>
-        <TextField
-          id="standard-basic"
-          type="text"
-          variant="standard"
-          color="secondary"
-          autoComplete="off"
-          autoFocus
-          inputRef={usernameRef}
-          sx={{ width: "85%" }}
-        />
         <Typography variant="body1" component="p" sx={{ mt: "2.5em" }}>
           Email:
         </Typography>

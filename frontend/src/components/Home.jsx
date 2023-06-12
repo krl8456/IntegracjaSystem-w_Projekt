@@ -20,7 +20,7 @@ function Home() {
         </Typography>
         <Typography variant="body1" component="p" sx={{ marginBlock: 3 }}>
           Na stronie dostępne są interaktywne wykresy przedstawiające zmiany cen
-          poszczególnych towarów i usług, spowodowane inwazją Rosji na Ukrainę.
+          poszczególnych towarów i usług, spowodowane inwazją Rosji na Ukrainę. <br/>
           Po wybraniu na wykresie miesiąca, w którym trwał konflikt (data
           rozpoczęcia Luty 2021), pojawi się krótka lista wydarzeń z tego
           miesiąca.

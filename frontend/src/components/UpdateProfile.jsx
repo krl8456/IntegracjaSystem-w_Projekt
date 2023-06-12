@@ -35,7 +35,7 @@ const UpdateProfile = () => {
     try {
       setLoading(true);
       setError("");
-      const response = await axios.put(
+      await axios.put(
         "http://127.0.0.1:8000/api/user/update",
         {
           name: usernameRef.current.value,
