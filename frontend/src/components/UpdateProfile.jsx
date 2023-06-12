@@ -25,6 +25,10 @@ const UpdateProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(passwordRef.current.value.length < 8 || passwordConfirmRef.current.value.length < 8) {
+      return setError("Hasło musi posiadać co najmniej 8 znaków");
+    }
+
     if (passwordRef?.current?.value !== passwordConfirmRef?.current?.value) {
       return setError("Passwords don't match");
     }
@@ -52,12 +56,20 @@ const UpdateProfile = () => {
       });
 
       setUser(getUser.data);
-      setLoading(false);
       navigate("/");
     } catch (e) {
-      setError("Failed to Update a profile");
-      console.error("Error:", error);
+      if (e.response.data.errors.name && e.response.data.errors.email) {
+        setError("Podana nazwa użytkownika i email są zajęte")
+      }
+      else if (e.response.data.errors.name) {
+        setError(e.response.data.errors.name)
+      }
+      else {
+        setError(e.response.data.errors.email)
+      }
+      console.error("Update Error:", e);
     }
+    setLoading(false);
   };
   if (!user) {
     return <></>;

@@ -17,12 +17,15 @@ class AuthController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255|unique:users',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8'
-            ]);
+            ], [
+                    'name.unique' => 'Ta nazwa użytkownika jest już zajęta', 
+                    'email.unique' => 'Ten adres email jest już zajęty.',
+                ]);
             if ($validator->fails()) {
-                return response()->json($validator->errors());
+                return response()->json(['message' => 'Failed to register', 'errors' => $validator->errors()], 422);
             }
             $user = User::create([
                 'name' => $request->name,
@@ -77,13 +80,16 @@ class AuthController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string',
-                'email' => 'required|string|email|max:255|unique:users,email,' . auth()->user()->id,
+                'name' => 'required|string|max:255|unique:users',
+                'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8'
+            ], [
+                'name.unique' => 'Ta nazwa użytkownika jest już zajęta', 
+                'email.unique' => 'Ten adres email jest już zajęty.',
             ]);
 
             if ($validator->fails()) {
-                return response()->json($validator->errors());
+                return response()->json(['message' => 'Failed to register', 'errors' => $validator->errors()], 422);                
             }
 
             $user = User::where('id', auth()->user()->id)->lockForUpdate()->firstOrFail();

@@ -55,8 +55,16 @@ function Register() {
       setUser(getUser.data);
 
       navigate("/");
-    } catch (error) {
-      setError("Wystąpił błąd");
+    } catch (e) {
+      if (e.response.data.errors.name && e.response.data.errors.email) {
+        setError("Podana nazwa użytkownika i email są zajęte")
+      }
+      else if (e.response.data.errors.name) {
+        setError(e.response.data.errors.name)
+      }
+      else {
+        setError(e.response.data.errors.email)
+      }
       console.error("Register error:", error);
     }
 
