@@ -24,6 +24,10 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(passwordRef.current.value.length < 8 || passwordConfirmRef.current.value.length < 8) {
+      return setError("Hasło musi posiadać co najmniej 8 znaków");
+    }
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Hasło i jego potwierdzenie muszą być jednakowe");
     }

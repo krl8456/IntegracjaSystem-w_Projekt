@@ -47,7 +47,7 @@ export default function Navbar() {
   return (
     <AppBar position="static" color="secondary">
       <Toolbar sx={{ display: "flex" }}>
-        <Link to="/">My App</Link>
+        <Link to="/">Strona główna</Link>
         {user ? (
           <Box sx={{ml: "auto"}}>
             <Link

@@ -41,7 +41,7 @@ class AuthController extends Controller
                 ]);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Failed to update user information'], 500);
+            return response()->json(['message' => 'Failed to register'], 500);
         }
     }
 
@@ -116,7 +116,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'User deleted successfully']);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Failed to update user information'], 500);
+            return response()->json(['message' => 'Failed to delete user'], 500);
         }
     }
 }

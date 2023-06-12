@@ -27,6 +27,10 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(passwordRef.current.value.length < 8) {
+      return setError("Hasło musi posiadać co najmniej 8 znaków");
+    }
+
     try {
       setError('');
       setLoading(true);

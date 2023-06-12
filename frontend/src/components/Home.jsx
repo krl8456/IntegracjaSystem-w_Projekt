@@ -5,6 +5,8 @@ import { UserContext } from "../contexts/UserContext";
 
 function Home() {
   const { user } = useContext(UserContext);
+  const token = localStorage.getItem("token");
+
 
   return (
     <Box display="flex" sx={{ marginLeft: 3 }}>
@@ -25,7 +27,7 @@ function Home() {
         </Typography>
         {user ? (
           <>
-            <Typography variant="body2" component="p" sx={{ marginTop: 5 }}>
+            <Typography variant="h5" component="p" sx={{ marginTop: 5 }}>
               Witaj {user.name}, kliknij aby zacząć przeglądać wykresy
             </Typography>
             <Link to={"/chart"}>
@@ -38,9 +40,9 @@ function Home() {
               </Button>
             </Link>
           </>
-        ) : (
+        ) : token ? <></> : (
           <>
-            <Typography variant="body2" component="p" sx={{ marginTop: 5 }}>
+            <Typography variant="h5" component="p" sx={{ marginTop: 5 }}>
               Zarejestruj się lub zaloguj by móc wyświetlić wykresy
             </Typography>
             <Box>
