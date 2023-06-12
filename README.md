@@ -8,7 +8,7 @@ Skład grupy projektowej:
 
 Wykorzystane technologie:
   - Laravel
-  - JavaScript
+  - MySQL
   - React
 
 Na stronie dostępne są interaktywne wykresy przedstawiające zmiany cen
@@ -26,10 +26,13 @@ wykorzystując przygotowaną aplikację:
   - Jak inwazja Rosji na Ukrainę odbiła się na kosztach usług i produktów wykorzystywanych w gospodarstwach domowych?
   - Co i kiedy wydarzyło się na froncie?
 
-Do prawidłowego działania aplikacji należy uruchomić XAMPP.
+Do prawidłowego działania aplikacji należy w XAMPP uruchomić serwery Apache i MySQL.
 Instrukcja wykorzystania aplikacji:
  - backend
-    - php artisan migrate
+    - composer update
+    - composer install
+    - należy w folderze stworzyć nowy plik .env i przekopiować do niego zawartość z pliku .env.example
+    - php artisan migrate 
     - php artisan data:import
     - php artisan serve
  - frontend
