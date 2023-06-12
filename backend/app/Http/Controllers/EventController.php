@@ -15,19 +15,6 @@ class EventController extends Controller
     {
         $dane = Event::select('data', 'wydarzenia')->get();
 
-        // $formattedData = $dane->map(function ($data) {
-        //     $values = [];
-        //     foreach ($data->toArray() as $key => $value) {
-
-        //             $values[] = $value;
-        //     }
-
-        //     return [
-        //         'data' => $data,
-        //         'wydarzenia' => $values,
-        //     ];
-        // });
-
         return response()->json($dane);
     }
 }

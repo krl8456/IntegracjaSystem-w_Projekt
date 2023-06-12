@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('data');
-            $table->json('wydarzenia');
+            $table->string('wydarzenia', 6000)->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
             $table->timestamps();
         });
     }
