@@ -119,7 +119,7 @@ class ImportDataCommand extends Command
         foreach ($eventData as $item) {
             Event::create([
                 'data' => $item['data'],
-                'wydarzenia' => json_encode($item['wydarzenia']),
+                'wydarzenia' => json_encode($item['wydarzenia'], JSON_UNESCAPED_UNICODE),
             ]);
         }
 
