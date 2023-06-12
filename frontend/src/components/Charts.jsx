@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -12,7 +12,8 @@ const Charts = () => {
   const [eventsData, setEventsData] = useState([]);
   const [index, setIndex] = useState(null);
   const token = localStorage.getItem("token");
-
+  const offset = 13;
+  const adjustedIndex = index !== null ? (index - offset) : null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +28,7 @@ const Charts = () => {
         );
         setConsumerChartData(consumerProduct.data);
 
-        const events = await axios.get(
-          "http://127.0.0.1:8000/api/events-data"
-        );
+        const events = await axios.get("http://127.0.0.1:8000/api/events-data");
         setEventsData(events.data);
       } catch (error) {
         console.error(error);
@@ -41,22 +40,22 @@ const Charts = () => {
 
   const downloadFile = () => {
     axios({
-      url: 'http://127.0.0.1:8000/api/xml',
-      method: 'GET',
-      responseType: 'blob',
+      url: "http://127.0.0.1:8000/api/xml",
+      method: "GET",
+      responseType: "blob",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = url;
-        a.download = 'file.xml';
+        a.download = "file.xml";
         a.click();
       })
       .catch((error) => {
-        console.error('Error downloading file:', error);
+        console.error("Error downloading file:", error);
       });
   };
 
@@ -108,10 +107,10 @@ const Charts = () => {
           events: {
             click: function () {
               setIndex(this.x);
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
     },
     series: checkedProducts.map((product) => ({
       name: product,
@@ -148,7 +147,7 @@ const Charts = () => {
   return (
     <div>
       <div>
-        <Box display="flex" sx={{marginLeft: 3}}>
+        <Box display="flex" sx={{ marginLeft: 3 }}>
           <Box flex="1">
             <Typography variant="h4" component="p" sx={{ marginBlock: 3 }}>
               Towary nieżywnościone i usługi:
@@ -189,22 +188,44 @@ const Charts = () => {
               </div>
             ))}
           </Box>
-         <Button color="secondary" variant="contained" sx={{ mr: 10, mb: 20, mt: 10 }} onClick={downloadFile}>
-           Wyeksportuj Dane
-         </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            sx={{ mr: 10, mb: 35, mt: 10 }}
+            onClick={downloadFile}
+          >
+            Wyeksportuj Dane
+          </Button>
         </Box>
       </div>
       <div>
         <HighchartsReact highcharts={Highcharts} options={options} />
       </div>
-      <Box sx={{ marginLeft: 3 }} >
-        { index !== null && ( <>
-        <Typography variant="h6" component="p" sx={{ marginBlock: 3 }}>
-            {eventsData[index].data}
-        </Typography>
-        <Typography variant="body1" component="p" sx={{ marginBlock: 3 }}>
-            {eventsData[index].wydarzenia}
-        </Typography></>
+      <Box sx={{ marginLeft: 3 }}>
+        {console.log("index: "+index)}
+        {console.log("adjusted index: "+adjustedIndex)}
+        {adjustedIndex !== null && adjustedIndex >= 0 ? (
+          <>
+            <Typography variant="h6" component="p" sx={{ marginBlock: 3 }}>
+              {eventsData[adjustedIndex].data}
+            </Typography>
+            <Typography variant="body1" component="p" sx={{ marginBlock: 3 }}>
+              {eventsData[adjustedIndex].wydarzenia
+                .substring(2, eventsData[adjustedIndex].wydarzenia.length - 2)
+                .split('","')
+                .map((item, index) => (
+                  <Fragment key={index}>
+                    <span>&#8226; </span>
+                    {item.trim()}
+                    <br />
+                  </Fragment>
+                ))}
+            </Typography>
+          </>
+        ) : (
+          <Typography variant="body1" component="p">
+            No data
+          </Typography>
         )}
       </Box>
     </div>
