@@ -6,33 +6,46 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Auth;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8'
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()
-            ->json([
-                'data' => $user,
-                'access_token' => $token,
-                'token_type' => 'Bearer',
+        DB::beginTransaction();
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8'
             ]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors());
+            }
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+
+            DB::commit();
+            return response()
+                ->json([
+                    'data' => $user,
+                    'access_token' => $token,
+                    'token_type' => 'Bearer',
+                ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'Failed to update user information'], 500);
+        }
     }
+
+
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
@@ -57,32 +70,53 @@ class AuthController extends Controller
         ];
     }
 
+
     public function update(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|string|email|max:255|unique:users,email,' . auth()->user()->id,
-            'password' => 'required|string|min:8'
-        ]);
+        DB::beginTransaction();
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string',
+                'email' => 'required|string|email|max:255|unique:users,email,' . auth()->user()->id,
+                'password' => 'required|string|min:8'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors());
+            }
+
+            $user = User::where('id', auth()->user()->id)->lockForUpdate()->firstOrFail();
+
+            //$user = User::findOrFail(auth()->user()->id);
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            DB::commit();
+            return response()->json(['message' => 'User information updated successfully']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'Failed to update user information'], 500);
         }
-
-        $user = User::findOrFail(auth()->user()->id);
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-
-        return response()
-            ->json(['message' => 'User information updated successfully']);
     }
+
+
     public function delete(Request $request)
     {
-        $user = User::findOrFail(auth()->user()->id);
-        $user->delete();
-        return response()->json(['message' => 'User deleted successfully']);
+        DB::beginTransaction();
+
+        try {
+            $user = User::findOrFail(auth()->user()->id);
+            $user->delete();
+
+            DB::commit();
+            return response()->json(['message' => 'User deleted successfully']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'Failed to update user information'], 500);
+        }
     }
 }
