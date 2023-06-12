@@ -32,6 +32,7 @@ Instrukcja wykorzystania aplikacji:
     - composer update
     - composer install
     - należy w folderze stworzyć nowy plik .env i przekopiować do niego zawartość z pliku .env.example
+    - php artisan key:generate
     - php artisan migrate 
     - php artisan data:import
     - php artisan serve
